@@ -7,10 +7,6 @@ import { Icon } from 'astro-icon/components';
 
 <section class="flex gap-10 px-20 justify-center items-center h-screen">
     <div class="basis-1/2 space-y-5">
-        <div class="flex gap-1 items-center border rounded-full w-fit py-1 px-3 bg-emerald-50 border-emerald-500 text-emerald-600">
-            <Icon name="fluent:checkmark-starburst-20-filled" class="size-5 text-emerald-500" />
-            <p class="font-medium">Terakreditasi Paripurna • FKTP Kemenkes RI</p>
-        </div>
         <h1 class="text-6xl font-bold">Layanan Kesehatan Komprehensif, Terpercaya & Sepenuh Hati untuk Warga Medan.</h1>
         <p class="text-xl text-zinc-500">Melayani dengan filosofi 3S (Senyum, Sapa, Sentuh). Kami hadir memberikan penanganan medis primer terbaik dengan sinergi 10+ dokter berpengalaman, fasilitas mutakhir, serta jam operasional panjang hingga malam hari.</p>
         <div class="flex gap-2">
@@ -32,5 +28,18 @@ import { Icon } from 'astro-icon/components';
             />
         </div>
     </div>
-    <div class="basis-1/2 bg-zinc-200 size-full max-h-[70dvh] rounded-tr-4xl rounded-bl-4xl"></div>
+    <div class="basis-1/2 size-full max-h-[70dvh] relative z-0">
+        <img 
+            src="https://images.unsplash.com/photo-1758691461990-03b49d969495?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0& ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            alt="hero-image"
+            class="absolute h-full object-cover rounded-tr-4xl rounded-bl-4xl"
+        >
+        <div class="absolute bg-white right-5 top-5 rounded-2xl p-5 space-y-1">
+            <div class="flex gap-2 items-center">
+                <Icon name="fluent:checkmark-starburst-24-filled" class="size-5 text-blue-500" />
+                <p class="text-sm">FKTP Kemenkes RI</p>
+            </div>
+            <p class="font-bold uppercase">Terakreditasi Paripurna</p>
+        </div>
+    </div>
 </section>
