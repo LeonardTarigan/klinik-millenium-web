@@ -1,0 +1,32 @@
+---
+import ScheduleCard from "../fragments/ScheduleCard.astro";
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="px-20 py-10 bg-zinc-100 grid grid-cols-4 gap-5">
+    <ScheduleCard
+        iconName="fluent:calendar-12-filled"
+        day="Hari Senin - Sabtu"
+        time="07:00 - 23:00 WIB"
+    />
+    <ScheduleCard
+        iconName="fluent:calendar-clock-16-filled"
+        day="Hari Minggu"
+        time="08:00 - 23:00 WIB"
+    />
+    <ScheduleCard
+        iconName="fluent:calendar-star-16-filled"
+        day="Hari Libur Nasional"
+        time="08:00 - 21:00 WIB"
+    />
+    <div class="p-5 rounded-2xl bg-primary space-y-2 text-white">
+        <div class="flex justify-between">
+            <p class="text-sm">Bantuan & Kontak Cepat</p>
+            <Icon name="fluent:call-connecting-20-filled" class="size-5" />
+        </div>
+        <div>
+            <p class="font-bold text-xl">(061) 8446652</p>
+            <p class="text-sm">WA: 0813-7133-1419</p>
+        </div>
+    </div>
+</section>

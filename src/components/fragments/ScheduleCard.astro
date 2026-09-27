@@ -1,0 +1,32 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    day: string
+    time: string
+    iconName: string
+}
+
+const { day, time, iconName } = Astro.props
+
+const [openTime, closeTime] = time.split(' – ')
+---
+
+<div class="bg-white rounded-2xl p-5">
+    <!-- Header -->
+    <div class="flex items-center gap-3">
+        <div class="size-8 p-2 rounded-md bg-zinc-100 flex items-center justify-center">
+            <Icon name={iconName} class="size-5 text-zinc-500" />
+        </div>
+
+        <p class="text-zinc-500 uppercase font-medium text-sm">
+            {day}
+        </p>
+    </div>
+
+    <!-- Time -->
+    <p class="font-bold text-xl mt-3">
+        {time}
+    </p>
+
+</div>
