@@ -1,12 +1,14 @@
 ---
 import LandingHeroSection from '@/components/sections/LandingHeroSection.astro';
-import Layout from '../layouts/Layout.astro';
+import LandingProgramHighlightSection from '@/components/sections/LandingProgramHighlightSection.astro';
 import LandingScheduleSection from '@/components/sections/LandingScheduleSection.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<main>
+	<main class="px-20">
 		<LandingHeroSection />
 		<LandingScheduleSection />
+		<LandingProgramHighlightSection />
 	</main>
 </Layout>

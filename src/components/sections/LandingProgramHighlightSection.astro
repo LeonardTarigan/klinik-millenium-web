@@ -1,0 +1,33 @@
+---
+import ProgramCard from "../fragments/ProgramCard.astro";
+---
+
+<section class="py-20">
+    <div class="text-center mb-10 flex flex-col items-center gap-5">
+        <h2 class="font-bold text-4xl">Program Unggulan Klinik</h2>
+        <p class="text-zinc-500 max-w-3xl text-lg">
+            Inisiatif berbasis bukti untuk mempercepat diagnostik primer, 
+            menekan rujukan rumah sakit yang tidak perlu, dan memberikan solusi kesehatan digital responsif.
+        </p>
+    </div>
+    <div class="grid grid-cols-3 gap-5">
+        <ProgramCard 
+            abbriviation="TUKAR UANG LAE"
+            name="Turunkan Rujukan dengan Ultrasonografi, Laboratorium, EKG"
+            iconName="fluent:heart-pulse-checkmark-20-filled"
+            description="Program komprehensif tingkat pertama untuk mendeteksi dini kelainan organ vital, kehamilan risiko tinggi, dan masalah kardiovaskular secara tuntas di klinik. Pasien mendapatkan kepastian diagnosis tanpa bolak-balik antre rujukan rumah sakit bila dapat ditangani secara paripurna."
+        />
+        <ProgramCard 
+            abbriviation="SIDAK KU SIKAT"
+            name="Sini Dahak Kamu Aku Kasi Sertifikat"
+            iconName="healthicons:viral-lung-infection"
+            description="Inovasi pemantauan dan eliminasi Tuberkulosis (TB) proaktif. Pasien dengan batuk lebih dari 2 minggu difasilitasi uji dahak terstandar gratis, pendampingan kepatuhan minum obat 6 bulan penuh bersama kader kesehatan, serta pemberian sertifikat kelulusan terapi tuntas bebas TB."
+        />
+        <ProgramCard 
+            abbriviation="CINLOK"
+            name="Cari Informasi Konsultasi Online Klinik"
+            iconName="fluent:person-phone-24-filled"
+            description="Akses telekonsultasi digital terpadu bagi warga Medan. Pasien dapat berdiskusi dengan dokter jaga mengenai gejala awal, persiapan sebelum berobat langsung, tindak lanjut evaluasi obat pasca-kunjungan, hingga pengaturan jadwal tindakan tanpa perlu mengantre di loket pendaftaran."
+        />
+    </div>
+</section>

@@ -1,0 +1,26 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    abbriviation: string
+    name: string
+    description: string
+    iconName: string
+}
+
+const { abbriviation, name, description, iconName } = Astro.props
+---
+
+<div class="bg-white border p-5 rounded-2xl">
+    <div class="space-y-2">
+        <div class="size-10 p-2 rounded-md bg-zinc-100 flex items-center justify-center">
+            <Icon name={iconName} class="size-6 text-zinc-500" />
+        </div>
+        <div>
+            <h3 class="font-bold text-2xl">{abbriviation}</h3>
+            <p class="text-lg">{name}</p>
+        </div>
+    </div>
+
+    <p class="text-zinc-500 mt-5">{description}</p>
+</div>
