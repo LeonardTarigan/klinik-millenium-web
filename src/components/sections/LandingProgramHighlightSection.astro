@@ -2,15 +2,16 @@
 import ProgramCard from "../fragments/ProgramCard.astro";
 ---
 
-<section class="py-20">
-    <div class="text-center mb-10 flex flex-col items-center gap-5">
-        <h2 class="font-bold text-4xl">Program Unggulan Klinik</h2>
-        <p class="text-zinc-500 max-w-3xl text-lg">
+<section class="py-40">
+    <div class="mb-20 flex justify-between relative">
+        <h2 class="font-bold text-5xl">Program Unggulan Klinik.</h2>
+        <h2 class="font-black text-7xl top-4 text-zinc-100 -z-10 absolute">Program Unggulan Klinik.</h2>
+        <p class="text-zinc-500 max-w-xl text-lg">
             Inisiatif berbasis bukti untuk mempercepat diagnostik primer, 
             menekan rujukan rumah sakit yang tidak perlu, dan memberikan solusi kesehatan digital responsif.
         </p>
     </div>
-    <div class="grid grid-cols-3 gap-5">
+    <div class="grid grid-cols-3 gap-20">
         <ProgramCard 
             abbriviation="TUKAR UANG LAE"
             name="Turunkan Rujukan dengan Ultrasonografi, Laboratorium, EKG"
@@ -20,13 +21,13 @@ import ProgramCard from "../fragments/ProgramCard.astro";
         <ProgramCard 
             abbriviation="SIDAK KU SIKAT"
             name="Sini Dahak Kamu Aku Kasi Sertifikat"
-            iconName="healthicons:viral-lung-infection"
+            iconName="fluent:certificate-24-filled"
             description="Inovasi pemantauan dan eliminasi Tuberkulosis (TB) proaktif. Pasien dengan batuk lebih dari 2 minggu difasilitasi uji dahak terstandar gratis, pendampingan kepatuhan minum obat 6 bulan penuh bersama kader kesehatan, serta pemberian sertifikat kelulusan terapi tuntas bebas TB."
         />
         <ProgramCard 
             abbriviation="CINLOK"
             name="Cari Informasi Konsultasi Online Klinik"
-            iconName="fluent:person-phone-24-filled"
+            iconName="fluent:microphone-chat-24-filled"
             description="Akses telekonsultasi digital terpadu bagi warga Medan. Pasien dapat berdiskusi dengan dokter jaga mengenai gejala awal, persiapan sebelum berobat langsung, tindak lanjut evaluasi obat pasca-kunjungan, hingga pengaturan jadwal tindakan tanpa perlu mengantre di loket pendaftaran."
         />
     </div>

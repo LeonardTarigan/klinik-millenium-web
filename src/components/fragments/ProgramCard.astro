@@ -11,11 +11,9 @@ interface Props {
 const { abbriviation, name, description, iconName } = Astro.props
 ---
 
-<div class="bg-white border p-5 rounded-2xl">
-    <div class="space-y-2">
-        <div class="size-10 p-2 rounded-md bg-zinc-100 flex items-center justify-center">
-            <Icon name={iconName} class="size-6 text-zinc-500" />
-        </div>
+<div class="bg-white">
+    <div class="space-y-5">
+        <Icon name={iconName} class="size-10 text-primary" />
         <div>
             <h3 class="font-bold text-2xl">{abbriviation}</h3>
             <p class="text-lg">{name}</p>
