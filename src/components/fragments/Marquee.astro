@@ -1,0 +1,40 @@
+---
+export interface Props {
+  speed?: number | string;
+}
+
+const { speed = 15 } = Astro.props;
+const animationDuration = typeof speed === 'number' ? `${speed}s` : speed;
+const slotHTML = await Astro.slots.render('default');
+---
+
+<div class="relative w-full overflow-hidden flex whitespace-nowrap">
+  <div 
+    class="flex w-max animate-marquee" 
+    style={`--speed: ${animationDuration};`}
+  >
+    <!-- Original Content -->
+    <div class="flex items-center gap-8 pr-8 shrink-0" set:html={slotHTML} />
+    <!-- Duplicated Content -->
+    <div class="flex items-center gap-8 pr-8 shrink-0" aria-hidden="true" set:html={slotHTML} />
+  </div>
+</div>
+
+<style>
+  .animate-marquee {
+    animation: marquee-scroll var(--speed) linear infinite;
+  }
+  
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
