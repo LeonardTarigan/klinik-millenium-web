@@ -1,0 +1,58 @@
+---
+import ServiceCard from "../fragments/ServiceCard.astro";
+---
+
+<section class="flex gap-20 py-20 items-center">
+    <div class="relative -translate-y-24 basis-1/2">
+        <div class="w-2/3 aspect-square bg-zinc-100 rounded-4xl"></div>
+        <div class="absolute right-0 top-80 border-5 border-white rounded-4xl w-1/2 aspect-square bg-zinc-100"></div>
+    </div>
+    <div class="basis-1/2 space-y-20">
+        <div class="relative">
+            <h2 class="font-bold text-5xl">Pelayanan Medis.</h2>
+            <h2 class="font-black text-7xl top-4 text-zinc-100 -z-10 absolute">Pelayanan Medis.</h2>
+        </div>
+        <div class="space-y-6">
+            <ServiceCard
+                title="Pemeriksaan Dokter Umum"
+                description="Didukung 10 dokter umum berpengalaman untuk keluhan akut dan penyakit degeneratif."
+                iconName="healthicons:stethoscope-24px"
+            />
+            <ServiceCard
+                title="Klinik Gigi & Mulut"
+                description="Scaling karang gigi, penambalan komposit, pencabutan gigi, dan konsultasi kesehatan mulut."
+                iconName="healthicons:tooth-24px"
+            />
+            <ServiceCard
+                title="KIA & USG Kandungan"
+                description="Pemeriksaan antenatal care (ANC), monitoring denyut jantung janin, dan USG kehamilan."
+                iconName="healthicons:pregnant"
+            />
+            <ServiceCard
+                title="Pelayanan KB Terpadu"
+                description="Konsultasi kontrasepsi, pemasangan suntik KB, pil, implan, serta IUD oleh bidan tersertifikasi."
+                iconName="healthicons:family-planning"
+            />
+            <ServiceCard
+                title="Pelayanan TB Paru"
+                description="Diagnosis cepat batuk kronis, pengobatan OAT gratis terintegrasi Kemenkes, dan isolasi dahak."
+                iconName="healthicons:lungs"
+            />
+            <ServiceCard
+                title="Imunisasi Bayi & Anak"
+                description="Vaksin wajib nasional (BCG, Polio, DPT-HB-Hib, Campak/MR) serta vaksin tambahan anak."
+                iconName="healthicons:syringe-24px"
+            />
+            <ServiceCard
+                title="Home Visite (Kunjungan Rumah)"
+                description="Layanan medis dokter dan perawat langsung ke tempat tinggal lansia dan pasien bedridden."
+                iconName="healthicons:home-quarantine-24px"
+            />
+            <ServiceCard
+                title="Ruang Tindakan Medis (RTGD)"
+                description="Penjahitan luka terbuka, nebulizer asma, ekstraksi korpus alienum, dan resusitasi primer."
+                iconName="healthicons:ambulatory-clinic-24px"
+            />
+        </div>
+    </div>
+</section>
