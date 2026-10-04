@@ -2,17 +2,20 @@
 import ServiceCard from "../fragments/ServiceCard.astro";
 ---
 
-<section class="flex gap-20 py-20 items-center">
-    <div class="relative -translate-y-24 basis-1/2">
+<section class="flex gap-20 py-40 items-center">
+    <div class="relative -translate-y-24 basis-2/5">
         <div class="w-2/3 aspect-square bg-zinc-100 rounded-4xl"></div>
         <div class="absolute right-0 top-80 border-5 border-white rounded-4xl w-1/2 aspect-square bg-zinc-100"></div>
     </div>
-    <div class="basis-1/2 space-y-20">
-        <div class="relative">
+    <div class="basis-3/5 space-y-20">
+        <div class="relative space-y-10">
             <h2 class="font-bold text-5xl">Pelayanan Medis.</h2>
             <h2 class="font-black text-7xl top-4 text-zinc-100 -z-10 absolute">Pelayanan Medis.</h2>
+            <p class="text-zinc-500">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias iste a eos blanditiis, unde, suscipit dolor aut excepturi quae minus cumque facere architecto consequatur cum amet ex deserunt aperiam eius!
+            </p>
         </div>
-        <div class="space-y-6">
+        <div class="grid grid-cols-2 gap-6">
             <ServiceCard
                 title="Pemeriksaan Dokter Umum"
                 description="Didukung 10 dokter umum berpengalaman untuk keluhan akut dan penyakit degeneratif."
