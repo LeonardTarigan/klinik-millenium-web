@@ -1,5 +1,7 @@
 ---
+import { Icon } from "astro-icon/components";
 import BrandLogo from "../logo/BrandLogo.astro";
+import Button from "../starwind/button/Button.astro";
 
 const links = [
     { label: "Program", href: "#program" },
@@ -7,6 +9,9 @@ const links = [
     { label: "Mitra", href: "#mitra" },
     { label: "Lokasi", href: "#lokasi" },
 ];
+
+const message = "Halo Klinik Pratama Millenium, saya ingin bertanya tentang layanan.";
+const whatsappHref = `https://wa.me/6281371331419?text=${encodeURIComponent(message)}`;
 ---
 
 <nav class="px-20 py-5 border sticky top-0 bg-white z-10 flex items-center justify-between">
@@ -28,7 +33,18 @@ const links = [
         }
     </div>
 
-    <div></div>
+     <div>
+        <Button
+            variant="primary"
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-whatsapp hover:bg-whatsapp/80 font-semibold gap-2 text-white"
+        >
+            <Icon name="akar-icons:whatsapp-fill" class="size-5" />
+            Hubungi Kami
+        </Button>
+    </div>
 </nav>
 
 <script>

@@ -28,6 +28,7 @@
     "esbuild": true
   },
   "devDependencies": {
+    "@iconify-json/akar-icons": "^1.2.7",
     "@iconify-json/fluent": "^1.2.59",
     "@iconify-json/healthicons": "^1.2.13",
     "prettier": "^3.9.9",
