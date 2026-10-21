@@ -2,20 +2,22 @@
 import ServiceCard from "../fragments/ServiceCard.astro";
 ---
 
-<section id="layanan" class="flex gap-20 py-40 items-center">
-    <div class="relative -translate-y-24 basis-2/5">
+<section id="layanan" class="scroll-mt-24 flex flex-col items-stretch gap-12 py-20 lg:py-40 xl:flex-row xl:items-center xl:gap-20">
+    <div class="relative mx-auto aspect-[10/9] w-full max-w-sm xl:mx-0 xl:aspect-auto xl:max-w-none xl:basis-2/5 xl:-translate-y-24">
         <div class="w-2/3 aspect-square bg-zinc-100 rounded-4xl"></div>
-        <div class="absolute right-0 top-50 border-5 border-white rounded-4xl w-1/2 aspect-square bg-zinc-100"></div>
+        <div class="absolute right-0 bottom-0 xl:bottom-auto xl:top-50 border-5 border-white rounded-4xl w-1/2 aspect-square bg-zinc-100"></div>
     </div>
-    <div class="basis-3/5 space-y-20">
-        <div class="relative space-y-10">
-            <h2 class="font-bold text-5xl">Pelayanan Medis.</h2>
-            <h2 class="font-black text-7xl top-4 text-zinc-100 -z-10 absolute">Pelayanan Medis.</h2>
+    <div class="space-y-10 xl:basis-3/5 xl:space-y-20">
+        <div class="relative space-y-6 lg:space-y-10">
+            <h2 class="font-bold text-3xl sm:text-4xl lg:text-5xl">Pelayanan Medis.</h2>
+            <h2 aria-hidden="true" class="absolute top-2 -z-10 text-4xl font-black text-zinc-100 sm:text-5xl md:text-6xl lg:top-4 lg:text-7xl">
+                Pelayanan Medis.
+            </h2>
             <p class="text-zinc-500">
                 Dari pemeriksaan umum, kesehatan ibu dan anak, hingga tindakan medis dasar, semua dilayani di satu klinik oleh tenaga kesehatan berpengalaman. Didukung laboratorium, USG, dan apotek, serta rujukan terkoordinasi ke rumah sakit di Kota Medan bila Anda memerlukan penanganan lanjutan.
             </p>
         </div>
-        <div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <ServiceCard
                 title="Pemeriksaan Dokter Umum"
                 description="Didukung 10 dokter umum berpengalaman untuk keluhan akut dan penyakit degeneratif."

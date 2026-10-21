@@ -3,12 +3,11 @@ import { Button } from "@/components/starwind/button";
 import { Icon } from 'astro-icon/components';
 ---
 
-
-<section class="flex gap-10 justify-center items-center h-[90dvh]">
-    <div class="basis-1/2 space-y-5">
-        <h1 class="text-5xl font-bold">Layanan Kesehatan Komprehensif, Terpercaya & Sepenuh Hati untuk Warga Medan.</h1>
-        <p class="text-lg text-zinc-500">Melayani dengan filosofi 3S (Senyum, Sapa, Sentuh), kami hadir memberikan layanan kesehatan yang terpercaya dan sepenuh hati, didukung oleh tenaga medis berpengalaman, fasilitas lengkap, serta akreditasi Paripurna.</p>
-        <div class="flex gap-2">
+<section class="flex flex-col items-stretch gap-8 py-10 lg:flex-row lg:items-center lg:justify-center lg:gap-10 lg:py-0 lg:h-[90dvh]">
+    <div class="space-y-5 lg:basis-1/2">
+        <h1 class="text-3xl font-bold sm:text-4xl lg:text-5xl">Layanan Kesehatan Komprehensif, Terpercaya & Sepenuh Hati untuk Warga Medan.</h1>
+        <p class="text-base text-zinc-500 lg:text-lg">Melayani dengan filosofi 3S (Senyum, Sapa, Sentuh), kami hadir memberikan layanan kesehatan yang terpercaya dan sepenuh hati, didukung oleh tenaga medis berpengalaman, fasilitas lengkap, serta akreditasi Paripurna.</p>
+        <div class="flex flex-wrap gap-2">
             <a
                 href="#layanan"
                 data-nav-link
@@ -23,22 +22,23 @@ import { Icon } from 'astro-icon/components';
             </a>
         </div>
     </div>
-    <div class="basis-1/2 size-full max-h-[70dvh] relative z-0">
-        <img 
-            src="https://images.unsplash.com/photo-1758691461990-03b49d969495?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0& ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+
+    <div class="relative z-0 h-72 w-full sm:h-96 lg:basis-1/2 lg:size-full lg:max-h-[70dvh]">
+        <img
+            src="https://images.unsplash.com/photo-1758691461990-03b49d969495?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="hero-image"
-            class="absolute h-full object-cover rounded-tl-4xl rounded-br-4xl"
+            class="absolute h-full w-full object-cover rounded-tl-4xl rounded-br-4xl lg:w-auto"
         >
-        <div class="absolute bg-white shadow-md right-5 bottom-5 rounded-2xl p-5 space-y-1">
-            <div class="flex gap-2 items-center">
+        <div class="absolute right-3 bottom-3 space-y-1 rounded-2xl bg-white p-3 shadow-md lg:right-5 lg:bottom-5 lg:p-5">
+            <div class="flex items-center gap-2">
                 <span
                     class="relative isolate inline-flex bg-white text-black after:absolute after:inset-0 after:mix-blend-screen after:bg-linear-to-br after:from-[#F7D774] after:via-[#D4A22A] after:to-[#A87516]"
                 >
                     <Icon name="fluent:checkmark-starburst-24-filled" class="size-5" />
                 </span>
-                <p class="text-sm">FKTP Kemenkes RI</p>
+                <p class="text-xs lg:text-sm">FKTP Kemenkes RI</p>
             </div>
-            <p class="font-bold uppercase">Terakreditasi Paripurna</p>
+            <p class="text-sm font-bold uppercase lg:text-base">Terakreditasi Paripurna</p>
         </div>
     </div>
 </section>

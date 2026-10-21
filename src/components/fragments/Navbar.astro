@@ -15,40 +15,61 @@ const message = "Halo Klinik Pratama Millenium, saya ingin bertanya tentang laya
 const whatsappHref = `https://wa.me/6281371331419?text=${encodeURIComponent(message)}`;
 ---
 
-<nav class="px-20 py-5 border sticky top-0 bg-white z-10 flex items-center justify-between">
+<nav class="px-4 py-4 sm:px-8 lg:px-20 lg:py-5 border sticky top-0 bg-white z-10 flex items-center justify-between">
     <a href="/" class="flex items-center gap-2">
         <BrandLogo class="size-10 text-primary" />
     </a>
 
-    <div class="flex gap-10 text-zinc-500">
-        {
-            links.map((link) => (
-                <a
-                    href={link.href}
-                    data-nav-link
-                    class="underline decoration-transparent decoration-2 underline-offset-8 transition-colors hover:text-zinc-950 aria-[current=location]:text-primary aria-[current=location]:decoration-primary"
-                >
-                    {link.label}
-                </a>
-            ))
-        }
-    </div>
+    <!-- Hamburger (mobile and tablet only) -->
+    <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="nav-menu"
+        aria-label="Buka menu"
+        class="group -mr-2 grid size-10 place-items-center rounded-lg text-zinc-950 hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:hidden"
+    >
+        <Icon name="akar-icons:three-line-horizontal" class="size-6 group-aria-expanded:hidden" />
+        <Icon name="akar-icons:cross" class="hidden size-6 group-aria-expanded:block" />
+    </button>
 
-     <div>
-        <Button
-            variant="primary"
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-whatsapp hover:bg-whatsapp/80 font-semibold gap-2 text-white"
-        >
-            <Icon name="akar-icons:whatsapp-fill" class="size-5" />
-            Hubungi Kami
-        </Button>
+    <!-- Desktop: "contents" removes this wrapper, so links and CTA lay out exactly as before.
+         Mobile: becomes a dropdown panel under the navbar. -->
+    <div
+        id="nav-menu"
+        class="contents max-lg:absolute max-lg:inset-x-0 max-lg:top-full max-lg:hidden max-lg:flex-col max-lg:gap-4 max-lg:border-b max-lg:bg-white max-lg:px-4 max-lg:py-4 max-lg:shadow-lg sm:max-lg:px-8 max-lg:data-[open=true]:flex"
+    >
+        <div class="flex gap-10 text-zinc-500 max-lg:flex-col max-lg:gap-1">
+            {
+                links.map((link) => (
+                    <a
+                        href={link.href}
+                        data-nav-link
+                        class="underline decoration-transparent decoration-2 underline-offset-8 transition-colors hover:text-zinc-950 aria-[current=location]:text-primary aria-[current=location]:decoration-primary max-lg:py-3"
+                    >
+                        {link.label}
+                    </a>
+                ))
+            }
+        </div>
+
+        <div>
+            <Button
+                variant="primary"
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold gap-2 text-white max-lg:w-full"
+            >
+                <Icon name="akar-icons:whatsapp-fill" class="size-5" />
+                Hubungi Kami
+            </Button>
+        </div>
     </div>
 </nav>
 
 <script>
+    // ---- Scroll-spy (unchanged) ----
     const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"));
     const visible = new Set<string>();
 
@@ -75,5 +96,38 @@ const whatsappHref = `https://wa.me/6281371331419?text=${encodeURIComponent(mess
     links.forEach((link) => {
         const section = document.getElementById(link.hash.slice(1));
         if (section) observer.observe(section);
+    });
+
+    // ---- Mobile menu ----
+    const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+    const menu = document.getElementById("nav-menu");
+
+    const setMenu = (open: boolean) => {
+        if (!toggle || !menu) return;
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+        menu.dataset.open = String(open);
+    };
+
+    toggle?.addEventListener("click", () => {
+        setMenu(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    // Close after tapping a link
+    menu?.addEventListener("click", (event) => {
+        if ((event.target as HTMLElement).closest("a")) setMenu(false);
+    });
+
+    // Close on outside tap or Escape
+    document.addEventListener("click", (event) => {
+        if (!toggle?.closest("nav")?.contains(event.target as Node)) setMenu(false);
+    });
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setMenu(false);
+    });
+
+    // Reset when resizing up to desktop
+    window.matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
+        if (event.matches) setMenu(false);
     });
 </script>
