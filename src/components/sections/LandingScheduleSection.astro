@@ -1,32 +1,361 @@
 ---
-import ScheduleCard from "../fragments/ScheduleCard.astro";
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
+
+const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"] as const;
+const shortDays = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
+
+type Day = (typeof days)[number];
+type Slot = [start: string, end: string];
+
+interface Doctor {
+    name: string;
+    /** Optional photo from /public, e.g. "/doctors/hayati.jpg". Falls back to initials. */
+    photo?: string;
+    schedule: Partial<Record<Day, Slot>>;
+}
+
+// Source: "Jadwal Praktik Dokter" posters. Edit this array whenever a schedule changes.
+const doctors: Doctor[] = [
+    {
+        name: "dr. Hayati",
+        schedule: { Sabtu: ["15:00", "23:00"] },
+    },
+    {
+        name: "dr. Ema Ngapulina Sembiring",
+        schedule: {
+            Senin: ["08:00", "15:00"],
+            Selasa: ["07:00", "14:00"],
+            Rabu: ["08:00", "15:00"],
+            Kamis: ["08:00", "15:00"],
+            Jumat: ["08:00", "15:00"],
+        },
+    },
+    {
+        name: "dr. Syarifah Muzna Bewi",
+        schedule: {
+            Senin: ["08:00", "21:00"],
+            Selasa: ["08:00", "22:00"],
+            Jumat: ["08:00", "15:00"],
+        },
+    },
+    {
+        name: "dr. Bunga Tiara Dita",
+        schedule: { Rabu: ["08:00", "23:00"] },
+    },
+    {
+        name: "dr. Rebecca Nenita Ulina br Simatupang",
+        schedule: {
+            Senin: ["15:00", "22:00"],
+            Selasa: ["15:00", "21:00"],
+            Rabu: ["07:00", "22:00"],
+            Kamis: ["15:00", "22:00"],
+        },
+    },
+    {
+        name: "dr. Jonathan Yoseph Permana Sembiring",
+        schedule: {
+            Senin: ["15:00", "23:00"],
+            Selasa: ["15:00", "23:00"],
+            Kamis: ["07:00", "14:00"],
+            Jumat: ["07:00", "14:00"],
+            Sabtu: ["07:00", "14:00"],
+        },
+    },
+    {
+        name: "dr. Maria Roslina Wati",
+        schedule: {
+            Jumat: ["15:00", "22:00"],
+            Sabtu: ["08:00", "22:00"],
+            Minggu: ["08:00", "22:00"],
+        },
+    },
+    {
+        name: "dr. Umra",
+        schedule: {
+            Kamis: ["15:00", "21:00"],
+            Minggu: ["08:00", "15:00"],
+        },
+    },
+    {
+        name: "dr. Miter Elidanovan Harefa",
+        schedule: {
+            Senin: ["07:00", "14:00"],
+            Selasa: ["08:00", "15:00"],
+            Rabu: ["15:00", "21:00"],
+            Kamis: ["08:00", "23:00"],
+            Jumat: ["15:00", "23:00"],
+            Minggu: ["15:00", "23:00"],
+        },
+    },
+];
+
+const clinicHours = [
+    { icon: "fluent:calendar-12-filled", day: "Senin – Sabtu", time: "07:00 – 23:00 WIB" },
+    { icon: "fluent:calendar-clock-16-filled", day: "Minggu", time: "08:00 – 23:00 WIB" },
+    { icon: "fluent:calendar-star-16-filled", day: "Hari Libur Nasional", time: "08:00 – 21:00 WIB" },
+];
+
+const toMinutes = (time: string) => {
+    const [h, m] = time.split(":").map(Number);
+    return h * 60 + m;
+};
+
+const initials = (name: string) =>
+    name
+        .replace(/^dr\.?\s*/i, "")
+        .split(/\s+/)
+        .slice(0, 2)
+        .map((word) => word[0].toUpperCase())
+        .join("");
+
+// Doctors grouped per day, earliest shift first
+const byDay = days.map((day) =>
+    doctors
+        .filter((doctor) => doctor.schedule[day])
+        .map((doctor) => {
+            const [start, end] = doctor.schedule[day]!;
+            return {
+                name: doctor.name,
+                photo: doctor.photo,
+                initials: initials(doctor.name),
+                start,
+                end,
+                startMin: toMinutes(start),
+                endMin: toMinutes(end),
+                practiceDays: days
+                    .map((d, i) => (doctor.schedule[d] ? shortDays[i] : null))
+                    .filter(Boolean)
+                    .join(", "),
+            };
+        })
+        .sort((a, b) => a.startMin - b.startMin || a.name.localeCompare(b.name)),
+);
+
+const openHours = (dayIndex: number) => (dayIndex === 6 ? "08:00 – 23:00" : "07:00 – 23:00");
+
+const whatsappMessage = "Halo Klinik Pratama Millenium, saya ingin menanyakan jadwal dokter.";
+const whatsappHref = `https://wa.me/6281371331419?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 
-<section class="py-10 grid grid-cols-4 gap-5">
-    <ScheduleCard
-        iconName="fluent:calendar-12-filled"
-        day="Hari Senin - Sabtu"
-        time="07:00 - 23:00 WIB"
-    />
-    <ScheduleCard
-        iconName="fluent:calendar-clock-16-filled"
-        day="Hari Minggu"
-        time="08:00 - 23:00 WIB"
-    />
-    <ScheduleCard
-        iconName="fluent:calendar-star-16-filled"
-        day="Hari Libur Nasional"
-        time="08:00 - 21:00 WIB"
-    />
-    <div class="p-5 rounded-2xl bg-primary space-y-2 text-white">
-        <div class="flex justify-between">
-            <p class="text-sm">Bantuan & Kontak Cepat</p>
-            <Icon name="fluent:call-connecting-20-filled" class="size-5" />
-        </div>
-        <div>
-            <p class="font-bold text-xl">(061) 8446652</p>
-            <p class="text-sm">WA: 0813-7133-1419</p>
+<section id="jadwal" class="scroll-mt-24 py-20">
+    <header class="relative mb-16 flex justify-between">
+        <h2 class="text-5xl font-bold">Jadwal Dokter.</h2>
+        <h2 aria-hidden="true" class="absolute top-4 -z-10 text-7xl font-black text-zinc-100">
+            Jadwal Dokter.
+        </h2>
+        <p class="max-w-xl text-lg text-zinc-500">
+            Pilih hari untuk melihat dokter yang bertugas. Jadwal praktik bisa berubah, jadi
+            pastikan dulu lewat WhatsApp sebelum Anda datang.
+        </p>
+    </header>
+
+    <div class="grid gap-8 lg:grid-cols-12 lg:gap-12">
+        <!-- Clinic hours + quick contact -->
+        <aside class="space-y-4 lg:col-span-4">
+            <div class="rounded-3xl border border-zinc-200 bg-white p-6">
+                <h3 class="text-lg font-bold">Jam Operasional Klinik</h3>
+                <dl class="mt-2 divide-y divide-zinc-200">
+                    {
+                        clinicHours.map((h) => (
+                            <div class="flex items-center gap-4 py-4">
+                                <span
+                                    class="bg-primary/10 text-primary grid size-10 flex-none place-items-center rounded-lg"
+                                    aria-hidden="true"
+                                >
+                                    <Icon name={h.icon} class="size-5" />
+                                </span>
+                                <div>
+                                    <dt class="text-sm text-zinc-500">{h.day}</dt>
+                                    <dd class="font-bold">{h.time}</dd>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </dl>
+            </div>
+
+            <div class="bg-primary space-y-4 rounded-3xl p-6 text-white">
+                <div class="flex justify-between">
+                    <p class="text-sm">Bantuan &amp; Kontak Cepat</p>
+                    <Icon name="fluent:call-connecting-20-filled" class="size-5" />
+                </div>
+                <div>
+                    <a
+                        href="tel:+62618446652"
+                        class="text-2xl font-bold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    >
+                        (061) 8446652
+                    </a>
+                    <p class="text-sm text-white/80">WA: 0813-7133-1419</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Doctors schedule -->
+        <div class="lg:col-span-8">
+            <div role="tablist" aria-label="Pilih hari praktik" class="mb-6 flex flex-wrap gap-2">
+                {
+                    days.map((day, i) => (
+                        <button
+                            type="button"
+                            role="tab"
+                            id={`tab-${i}`}
+                            aria-controls={`panel-${i}`}
+                            aria-selected={i === 0 ? "true" : "false"}
+                            tabindex={i === 0 ? 0 : -1}
+                            data-day-tab
+                            class="focus-visible:outline-primary inline-flex items-center gap-1.5 rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-600 transition-colors aria-selected:border-primary aria-selected:bg-primary aria-selected:text-white aria-[selected=false]:hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2"
+                        >
+                            {day}
+                            <span
+                                data-today-dot
+                                aria-hidden="true"
+                                class="hidden size-1.5 rounded-full bg-current"
+                            />
+                        </button>
+                    ))
+                }
+            </div>
+
+            {
+                days.map((day, i) => (
+                    <div
+                        role="tabpanel"
+                        id={`panel-${i}`}
+                        aria-labelledby={`tab-${i}`}
+                        hidden={i !== 0}
+                        data-day-panel
+                    >
+                        <div class="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                            <h3 class="text-xl font-bold">
+                                Dokter praktik hari {day}
+                                <span data-today-label class="text-primary hidden"> (hari ini)</span>
+                            </h3>
+                            <p class="text-sm text-zinc-500">Klinik buka {openHours(i)} WIB</p>
+                        </div>
+
+                        {byDay[i].length > 0 ? (
+                            <ul class="divide-y divide-zinc-200 overflow-hidden rounded-3xl border border-zinc-200 bg-white">
+                                {byDay[i].map((doc) => (
+                                    <li
+                                        data-doctor-row
+                                        data-day={i}
+                                        data-start={doc.startMin}
+                                        data-end={doc.endMin}
+                                        class="group data-[live=true]:bg-primary/3 flex flex-wrap items-center gap-4 p-4 sm:px-6"
+                                    >
+                                        {doc.photo ? (
+                                            <img
+                                                src={doc.photo}
+                                                alt=""
+                                                width="48"
+                                                height="48"
+                                                loading="lazy"
+                                                class="size-12 flex-none rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <span
+                                                class="bg-primary/10 text-primary grid size-12 flex-none place-items-center rounded-full font-bold"
+                                                aria-hidden="true"
+                                            >
+                                                {doc.initials}
+                                            </span>
+                                        )}
+
+                                        <div class="min-w-0 flex-1">
+                                            <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                                                <p class="font-bold">{doc.name}</p>
+                                                <span class="hidden items-center gap-1.5 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700 group-data-[live=true]:inline-flex">
+                                                    <span class="size-1.5 rounded-full bg-emerald-500" />
+                                                    Sedang praktik
+                                                </span>
+                                            </div>
+                                            <p class="mt-0.5 text-xs text-zinc-500">
+                                                Hari praktik: {doc.practiceDays}
+                                            </p>
+                                        </div>
+
+                                        <p class="bg-primary/10 text-primary rounded-full px-4 py-1.5 text-sm font-semibold tabular-nums">
+                                            {doc.start} – {doc.end}
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p class="rounded-3xl border border-zinc-200 p-6 text-zinc-500">
+                                Belum ada jadwal dokter untuk hari {day}. Hubungi kami untuk informasi lebih lanjut.
+                            </p>
+                        )}
+                    </div>
+                ))
+            }
         </div>
     </div>
 </section>
+
+<script>
+    const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-day-tab]"));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>("[data-day-panel]"));
+    const rows = Array.from(document.querySelectorAll<HTMLElement>("[data-doctor-row]"));
+
+    // Always read the clock in WIB (Medan), whatever timezone the visitor's device is in
+    const jakartaNow = () => {
+        const parts = new Intl.DateTimeFormat("en-US", {
+            timeZone: "Asia/Jakarta",
+            weekday: "long",
+            hour: "2-digit",
+            minute: "2-digit",
+            hourCycle: "h23",
+        }).formatToParts(new Date());
+        const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+        return {
+            day: DAY_NAMES.indexOf(get("weekday")),
+            minutes: Number(get("hour")) * 60 + Number(get("minute")),
+        };
+    };
+
+    const select = (index: number, focus = false) => {
+        tabs.forEach((tab, i) => {
+            const active = i === index;
+            tab.setAttribute("aria-selected", String(active));
+            tab.tabIndex = active ? 0 : -1;
+            if (active && focus) tab.focus();
+        });
+        panels.forEach((panel, i) => {
+            panel.hidden = i !== index;
+        });
+    };
+
+    // Marks doctors who are practicing right now
+    const refreshLive = () => {
+        const now = jakartaNow();
+        rows.forEach((row) => {
+            const live =
+                Number(row.dataset.day) === now.day &&
+                now.minutes >= Number(row.dataset.start) &&
+                now.minutes < Number(row.dataset.end);
+            row.dataset.live = String(live);
+        });
+    };
+
+    tabs.forEach((tab, i) => {
+        tab.addEventListener("click", () => select(i));
+        tab.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowRight") select((i + 1) % tabs.length, true);
+            else if (event.key === "ArrowLeft") select((i - 1 + tabs.length) % tabs.length, true);
+        });
+    });
+
+    // Open on today's schedule
+    const today = jakartaNow().day;
+    if (today >= 0) {
+        tabs[today]?.querySelector("[data-today-dot]")?.classList.remove("hidden");
+        panels[today]?.querySelector("[data-today-label]")?.classList.remove("hidden");
+        select(today);
+    }
+
+    refreshLive();
+    setInterval(refreshLive, 60_000);
+</script>

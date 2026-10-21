@@ -15,6 +15,12 @@ import { Icon } from 'astro-icon/components';
             >
                 <Button variant="primary">Lihat Pelayanan</Button>
             </a>
+            <a
+                href="#jadwal"
+                data-nav-link
+            >
+                <Button variant="outline">Jadwal Dokter</Button>
+            </a>
         </div>
     </div>
     <div class="basis-1/2 size-full max-h-[70dvh] relative z-0">
@@ -25,7 +31,11 @@ import { Icon } from 'astro-icon/components';
         >
         <div class="absolute bg-white shadow-md right-5 bottom-5 rounded-2xl p-5 space-y-1">
             <div class="flex gap-2 items-center">
-                <Icon name="fluent:checkmark-starburst-24-filled" class="size-5 text-blue-500" />
+                <span
+                    class="relative isolate inline-flex bg-white text-black after:absolute after:inset-0 after:mix-blend-screen after:bg-linear-to-br after:from-[#F7D774] after:via-[#D4A22A] after:to-[#A87516]"
+                >
+                    <Icon name="fluent:checkmark-starburst-24-filled" class="size-5" />
+                </span>
                 <p class="text-sm">FKTP Kemenkes RI</p>
             </div>
             <p class="font-bold uppercase">Terakreditasi Paripurna</p>
