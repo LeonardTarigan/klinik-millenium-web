@@ -1,0 +1,122 @@
+---
+import { Icon } from "astro-icon/components";
+
+const year = new Date().getFullYear();
+
+const navLinks = [
+    { label: "Layanan", href: "#layanan" },
+    { label: "Program", href: "#program" },
+    { label: "Mitra", href: "#mitra" },
+    { label: "Lokasi", href: "#lokasi" },
+];
+
+const hours = [
+    { day: "Senin – Sabtu", time: "07.00 – 23.00 WIB" },
+    { day: "Minggu", time: "08.00 – 23.00 WIB" },
+    { day: "Hari Libur Nasional", time: "08.00 – 21.00 WIB" },
+];
+
+const contacts = [
+    {
+        icon: "fluent:location-24-filled",
+        label: "Jalan Kapten Muslim No. 18 C, Kec. Medan Helvetia, Medan, Sumatera Utara 20124",
+        href: "https://www.google.com/maps/search/?api=1&query=Klinik+Pratama+Millenium+Jalan+Kapten+Muslim+No.+18C+Medan",
+        external: true,
+    },
+    {
+        icon: "fluent:call-24-filled",
+        label: "(061) 8446652",
+        href: "tel:+62618446652",
+    },
+    {
+        icon: "fluent:chat-24-filled",
+        label: "0813-7133-1419",
+        href: "https://wa.me/6281371331419",
+        external: true,
+    },
+    {
+        icon: "fluent:mail-24-filled",
+        label: "klinikmillenium.74@gmail.com",
+        href: "mailto:Klinikmillenium.74@gmail.com",
+    },
+    {
+        icon: "fluent:camera-24-filled",
+        label: "@klinik_millenium",
+        href: "https://instagram.com/klinik_millenium",
+        external: true,
+    },
+];
+---
+
+<footer class="bg-primary relative overflow-hidden text-white">
+    <div class="px-20 pt-20 pb-10">
+        <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-16">
+            <!-- Brand -->
+            <div class="space-y-6 lg:col-span-6">
+                <div>
+                    <slot name="logo">
+                        <p class="text-2xl font-bold tracking-tight">Klinik Pratama Millenium</p>
+                    </slot>
+                    <p class="mt-3 max-w-xs text-white/80">
+                        Melayani dengan sepenuh hati: Senyum, Sapa, Sentuh.
+                    </p>
+                </div>
+
+                <div class="inline-flex items-center gap-3 rounded-xl bg-white px-4 py-3 text-zinc-950">
+                    <Icon name="fluent:certificate-24-filled" class="text-primary size-8" />
+                    <div>
+                        <p class="text-[0.7rem] leading-tight text-zinc-500">FKTP Kemenkes RI</p>
+                        <p class="text-sm leading-tight font-bold">Terakreditasi Paripurna</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6">
+                <div class="grid gap-10 sm:grid-cols-2">
+                    <!-- Hours -->
+                    <div>
+                        <h3 class="mb-4 font-bold">Jam Operasional</h3>
+                        <dl class="space-y-3 text-sm">
+                            {
+                                hours.map((h) => (
+                                    <div>
+                                        <dt class="text-white/80">{h.day}</dt>
+                                        <dd class="font-semibold">{h.time}</dd>
+                                    </div>
+                                ))
+                            }
+                        </dl>
+                    </div>
+
+                    <!-- Contact -->
+                    <div>
+                        <h3 class="mb-4 font-bold">Hubungi Kami</h3>
+                        <ul class="space-y-3 text-sm">
+                            {
+                                contacts.map((c) => (
+                                    <li>
+                                        <a
+                                            href={c.href}
+                                            target={c.external ? "_blank" : undefined}
+                                            rel={c.external ? "noopener noreferrer" : undefined}
+                                            class="flex items-start gap-3 text-white/80 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                                        >
+                                            <Icon name={c.icon} class="mt-0.5 size-4 flex-none text-white" />
+                                            <span class="wrap-break-word">{c.label}</span>
+                                        </a>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="mt-16 flex flex-col gap-2 border-t border-white/20 pt-6 text-white/80 sm:flex-row sm:items-center sm:justify-between">
+            <p>&copy; {year} Klinik Pratama Millenium.</p>
+            <p>Kesehatan Anda adalah prioritas kami.</p>
+        </div>
+    </div>
+</footer>
