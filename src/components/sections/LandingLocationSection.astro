@@ -35,7 +35,6 @@ const query = encodeURIComponent(`${name} ${street} ${district} ${city}`);
 
 const embedSrc =
   mapEmbedSrc ?? `https://www.google.com/maps?q=${query}&hl=id&z=16&output=embed`;
-const openMapHref = `https://www.google.com/maps/search/?api=1&query=${query}`;
 
 const contacts = [
   {
@@ -74,7 +73,7 @@ const contacts = [
     <header class="mb-20 flex justify-between relative">
         <h2 class="font-bold text-5xl">Lokasi Kami.</h2>
         <h2 class="font-black text-7xl top-4 text-zinc-100 -z-10 absolute">Lokasi Kami.</h2>
-        <p class="text-zinc-500 max-w-xl text-lg">
+        <p class="text-zinc-500 max-w-xl">
             Mudah dijangkau di Kecamatan Medan Helvetia. Datang langsung, atau hubungi kami lebih dulu
         untuk memastikan layanan yang Anda butuhkan.
         </p>
